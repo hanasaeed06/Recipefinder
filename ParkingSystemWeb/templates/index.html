@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking System</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://img.freepik.com/free-vector/empty-underground-car-parking-interior_107791-25521.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container */
+        .container {
+            max-width: 700px;
+            margin: 50px auto;
+            background: rgba(0, 0, 0, 0.8); /* Dark transparent background */
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+        }
+
+        /* Headings */
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        /* Section Styling */
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .slots, .waiting-line {
+            padding: 15px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background: #333;
+        }
+
+        /* Form Styling */
+        .form {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .form input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: #222;
+            color: #f0f0f0;
+            font-size: 16px;
+        }
+
+        .form button {
+            padding: 10px 15px;
+            border: none;
+            background: #28a745;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .form button:hover {
+            background-color: #218838;
+        }
+
+        /* Text Styling */
+        p {
+            margin: 5px 0;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Parking System</h1>
+        <div class="section">
+            <h2>Parking Slots</h2>
+            <div class="slots">
+                {% if parking_slots %}
+                    {{ parking_slots | join(", ") }}
+                {% else %}
+                    <p>No cars are parked.</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="section">
+            <h2>Waiting Line</h2>
+            <div class="waiting-line">
+                {% if waiting_line %}
+                    {{ waiting_line | join(", ") }}
+                {% else %}
+                    <p>The waiting line is empty.</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="section">
+            <h2>Park a Car</h2>
+            <form class="form" action="/park" method="POST">
+                <input type="text" name="car_number" placeholder="Enter car number" required>
+                <button type="submit">Park</button>
+            </form>
+        </div>
+        <div class="section">
+            <h2>Remove a Car</h2>
+            <form class="form" action="/remove" method="POST">
+                <input type="text" name="car_number" placeholder="Enter car number" required>
+                <button type="submit">Remove</button>
+            </form>
+        </div>
+        <footer>
+            <p>&copy; 2025 Parking System</p>
+        </footer>
+    </div>
+</body>
+</html>

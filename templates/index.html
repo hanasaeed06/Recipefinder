@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Finder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Recipe finder</h1>
+        <form method="POST">
+            <input type="text" name="ingredients" placeholder="Enter ingredients" required>
+            <button type="submit">Find Recipes</button>
+        </form>
+
+        {% if recipes %}
+        <div class="recipes">
+            {% for recipe in recipes %}
+                <div class="recipe-card">
+                    <h2>{{ recipe.title }}</h2>
+                    <img src="{{ recipe.image }}" alt="{{ recipe.title }}">
+                    <a href="https://spoonacular.com/recipes/{{ recipe.title | replace(' ', '-') }}-{{ recipe.id }}" target="_blank">View Recipe</a>
+
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+    <footer>
+        <p>Made with ❤️ by Hana Saeed</p>
+    </footer>
+</body>
+</html>
